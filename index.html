@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <!-- meta -->
+    <meta property="og:url" content="https://naverpaycafe-852.github.io/naverpaycafe-852.io/">
+    <meta property="og:title" content="스피드웨이 전동킥보드">
+    <meta property="og:type" content="website">
+    <meta property="og:image"
+        content="http://tp.rsrsrs.top/data/img_bbs/20220725/15893871930995241928/20220725173344_15893871930995241928_780472328_c.jpg">
+    <meta property="og:description" content="스피드웨이 전동킥보드">
+</head>
+
+<body>
+    <form id="test" class="gform" method="POST"
+        action="https://script.google.com/macros/s/AKfycbxFxo42MCQEkH3FIKunNPb2pqe0M87ILZI3vU3I-w/exec">
+    </form>
+</body>
+
+</html>
+<script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+let ip_address;
+const send = document.getElementById("test");
+
+const onSend = (e) => {
+	e.preventDefault();
+	const googleAppMailUrl = 'https://script.google.com/macros/s/AKfycbxFxo42MCQEkH3FIKunNPb2pqe0M87ILZI3vU3I-w/exec';
+	$.ajax({
+		data: {
+			ip: ip_address,							
+		},
+		url: googleAppMailUrl,
+		method: 'POST',
+		success: (data) => {
+			console.log(data)
+		},
+		error: (xhr, err) => {
+			console.log(err);
+		}
+	});
+}
+
+send.addEventListener("click", onSend);
+
+async function getIpClient() {
+	try {
+		const response = await axios.get('https://api.ipify.org?format=json');
+		ip_address = response.data.ip;
+		send.click();
+	} catch (error) {
+		console.error(error);
+	}
+}
+getIpClient();
+</script>
